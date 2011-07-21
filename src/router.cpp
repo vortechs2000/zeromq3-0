@@ -123,7 +123,7 @@ int zmq::router_t::xsend (msg_t *msg_, int flags_)
         //  If we have malformed message (prefix with no subsequent message)
         //  then just silently ignore it.
         //  TODO: The connections should be killed instead.
-        if (msg_->flags () & msg_t::label) {
+        if (msg_->flags () & msg_t::more) {
 
             more_out = true;
 
@@ -224,7 +224,7 @@ int zmq::router_t::xrecv (msg_t *msg_, int flags_)
             errno_assert (rc == 0);
             memcpy (msg_->data (), inpipes [current_in].identity.data (),
                 msg_->size ());
-            msg_->set_flags (msg_t::label);
+            msg_->set_flags (msg_t::more);
             return 0;
         }
 

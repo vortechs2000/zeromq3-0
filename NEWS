@@ -1,3 +1,16 @@
+0MQ version 3.0.1 (alpha), released on 2011/07/xx
+=================================================
+
+Bug fixes
+---------
+
+* Polling on Cygwin was broken - fixed.
+
+* Fixed issue 230: SIGPIPE errors on OS/X and FreeBSD.
+
+* Fixed issue 232: ROUTER socket doesn't set RCVMORE on identity frame.
+
+
 0MQ version 3.0.0 (alpha), released on 2011/07/12
 =================================================
 
