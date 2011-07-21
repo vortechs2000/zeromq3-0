@@ -10,6 +10,9 @@ Bug fixes
 
 * Fixed issue 232: ROUTER socket doesn't set RCVMORE on identity frame.
 
+* Fixed issue 234: assertion failure at mailbox.cpp:77 when Ctrl-C was
+  used.
+
 
 0MQ version 3.0.0 (alpha), released on 2011/07/12
 =================================================
