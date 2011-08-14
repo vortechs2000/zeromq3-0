@@ -224,7 +224,7 @@ int zmq_send (void *s_, const void *buf_, size_t len_, int flags_)
         errno = err;
         return -1;
     }
-    
+
     //  Note the optimisation here. We don't close the msg object as it is
     //  empty anyway. This may change when implementation of zmq_msg_t changes.
     return rc;
@@ -253,7 +253,7 @@ int zmq_recv (void *s_, void *buf_, size_t len_, int flags_)
     rc = zmq_msg_close (&msg);
     errno_assert (rc == 0);
 
-    return nbytes;    
+    return nbytes;
 }
 
 int zmq_sendmsg (void *s_, zmq_msg_t *msg_, int flags_)
@@ -591,12 +591,19 @@ int zmq_poll (zmq_pollitem_t *items_, int nitems_, long timeout_)
             memcpy (&errset, &pollset_err, sizeof (fd_set));
 #if defined ZMQ_HAVE_WINDOWS
             int rc = select (0, &inset, &outset, &errset, ptimeout);
-            wsa_assert (rc != SOCKET_ERROR);
+            if (unlikely (rc == SOCKET_ERROR)) {
+                wsa_error_to_errno ();
+                if (errno == ENOTSOCK)
+                    return -1;
+                wsa_assert (false);
+            }
 #else
             int rc = select (maxfd + 1, &inset, &outset, &errset, ptimeout);
-            if (rc == -1 && errno == EINTR)
-                return -1;
-            errno_assert (rc >= 0);
+            if (unlikely (rc == -1) {
+                if (errno == EINTR || errno == EBADF)
+                    return -1;
+                errno_assert (false);
+            }
 #endif
             break;
         }
