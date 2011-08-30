@@ -1,8 +1,12 @@
-0MQ version 3.0.1 (alpha), released on 2011/07/xx
+0MQ version 3.0.1 (alpha), released on 2011/08/30
 =================================================
 
 Bug fixes
 ---------
+
+* Fixed issue 207, assertion failure in zmq_connecter.cpp:48, when an
+  invalid zmq_connect() string was used, or the hostname could not be
+  resolved. The zmq_connect() call now returns -1 in both those cases.
 
 * Fixed issue 240, assertion failure in pgm_socket.cpp:437.
 
