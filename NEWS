@@ -1,5 +1,15 @@
-0MQ version 3.0.1 (alpha), released on 2011/08/30
-=================================================
+0MQ version 3.0.2 (beta), released on 2011/09/xx
+================================================
+
+Bug fixes
+---------
+
+* Fixed issue 244, crash in msg.cpp:126 when sending a multipart message
+  to a PUB socket.
+
+
+0MQ version 3.0.1 (beta), released on 2011/08/30
+================================================
 
 Bug fixes
 ---------
