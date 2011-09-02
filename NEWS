@@ -9,6 +9,9 @@ Bug fixes
 * Fixed issue 244, assertion failure in msg.cpp:126 when sending a 
   multipart message to a PUB socket.
 
+* Fixed issue 218, sockets not opened with SOCK_CLOEXEC, causing fork/exec
+  to sit on sockets unnecessarily.
+
 
 0MQ version 3.0.1 (beta), released on 2011/08/30
 ================================================
