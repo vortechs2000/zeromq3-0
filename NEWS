@@ -12,6 +12,8 @@ Bug fixes
 * Fixed issue 218, sockets not opened with SOCK_CLOEXEC, causing fork/exec
   to sit on sockets unnecessarily.
 
+* Fixed issue 248, wrong values reported for ROUTER and DEALER sockets.
+
 
 0MQ version 3.0.1 (beta), released on 2011/08/30
 ================================================
