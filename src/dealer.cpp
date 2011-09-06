@@ -25,7 +25,7 @@
 zmq::dealer_t::dealer_t (class ctx_t *parent_, uint32_t tid_) :
     socket_base_t (parent_, tid_)
 {
-    options.type = ZMQ_XREQ;
+    options.type = ZMQ_DEALER;
 }
 
 zmq::dealer_t::~dealer_t ()

@@ -30,7 +30,7 @@ zmq::router_t::router_t (class ctx_t *parent_, uint32_t tid_) :
     current_out (NULL),
     more_out (false)
 {
-    options.type = ZMQ_XREP;
+    options.type = ZMQ_ROUTER;
 
     //  On connect, pipes are created only after initial handshaking.
     //  That way we are aware of the peer's identity when binding to the pipes.
