@@ -152,14 +152,14 @@ ZMQ_EXPORT int zmq_term (void *context);
 #define ZMQ_SUB 2
 #define ZMQ_REQ 3
 #define ZMQ_REP 4
-#define ZMQ_XREQ 5
-#define ZMQ_XREP 6
+#define ZMQ_DEALER 5
+#define ZMQ_ROUTER 6
 #define ZMQ_PULL 7
 #define ZMQ_PUSH 8
 #define ZMQ_XPUB 9
 #define ZMQ_XSUB 10
-#define ZMQ_ROUTER 11
-#define ZMQ_DEALER 12
+#define ZMQ_XREQ ZMQ_DEALER
+#define ZMQ_XREP ZMQ_ROUTER
 
 /*  Socket options.                                                           */
 #define ZMQ_AFFINITY 4
