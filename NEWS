@@ -6,13 +6,19 @@ Bug fixes
 
 * Fixed issue 245, assertion failure in msg.cpp:270.
 
-* Fixed issue 244, assertion failure in msg.cpp:126 when sending a 
+* Fixed issue 244, assertion failure in msg.cpp:126 when sending a
   multipart message to a PUB socket.
 
 * Fixed issue 218, sockets not opened with SOCK_CLOEXEC, causing fork/exec
   to sit on sockets unnecessarily.
 
 * Fixed issue 248, wrong values reported for ROUTER and DEALER sockets.
+
+Building
+--------
+
+* Added configure --with-poller option to select polling mechanism. Will
+  autoselect from kqueue, epoll, devpoll, poll, and select (Mikko Koppanen).
 
 
 0MQ version 3.0.1 (beta), released on 2011/08/30
