@@ -14,6 +14,9 @@ Bug fixes
 
 * Fixed issue 248, wrong values reported for ROUTER and DEALER sockets.
 
+* Fixed issue 252, assertion failure in req.cpp:87 and req.cpp:88 (Mikko
+  Koppanen).
+
 Building
 --------
 
