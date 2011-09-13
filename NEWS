@@ -45,6 +45,10 @@ Bug fixes
 * Fixed issue 234: assertion failure at mailbox.cpp:77 when Ctrl-C was
   used.
 
+Building
+--------
+
+* 0MQ support for Android added (Bill Roberts, Mikko Koppanen).
 
 0MQ version 3.0.0 (alpha), released on 2011/07/12
 =================================================
