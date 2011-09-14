@@ -17,6 +17,8 @@ Bug fixes
 * Fixed issue 252, assertion failure in req.cpp:87 and req.cpp:88 (Mikko
   Koppanen).
 
+* Fixed issue 251, bug in message distribution (PUB socket) algorithm.
+
 Building
 --------
 
