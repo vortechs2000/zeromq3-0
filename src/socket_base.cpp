@@ -596,7 +596,7 @@ int zmq::socket_base_t::recv (msg_t *msg_, int flags_)
         if (rcvlabel)
             msg_->reset_flags (msg_t::label);
         rcvmore = msg_->flags () & msg_t::more ? true : false;
-        if (rcvmore)
+        if (rcvmore || rcvlabel)
             msg_->reset_flags (msg_t::more);
         return 0;
     }
@@ -617,7 +617,7 @@ int zmq::socket_base_t::recv (msg_t *msg_, int flags_)
         if (rcvlabel)
             msg_->reset_flags (msg_t::label);
         rcvmore = msg_->flags () & msg_t::more ? true : false;
-        if (rcvmore)
+        if (rcvmore || rcvlabel)
             msg_->reset_flags (msg_t::more);
         return 0;
     }
@@ -656,7 +656,7 @@ int zmq::socket_base_t::recv (msg_t *msg_, int flags_)
     if (rcvlabel)
         msg_->reset_flags (msg_t::label);
     rcvmore = msg_->flags () & msg_t::more ? true : false;
-    if (rcvmore)
+    if (rcvmore || rcvlabel)
         msg_->reset_flags (msg_t::more);
     return 0;
 }

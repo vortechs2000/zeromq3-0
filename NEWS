@@ -21,6 +21,8 @@ Bug fixes
 
 * Fixed issue 246, assertion failure in xrep.cpp:135.
 
+* Fixed issue 255, RCVMORE not set on labels.
+
 Building
 --------
 
