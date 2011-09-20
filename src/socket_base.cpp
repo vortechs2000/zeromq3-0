@@ -93,7 +93,7 @@ zmq::socket_base_t *zmq::socket_base_t::create (int type_, class ctx_t *parent_,
         break;
     case ZMQ_XREP:
         s = new (std::nothrow) xrep_t (parent_, tid_);
-        break;     
+        break;
     case ZMQ_PULL:
         s = new (std::nothrow) pull_t (parent_, tid_);
         break;
@@ -226,7 +226,7 @@ void zmq::socket_base_t::attach_pipe (pipe_t *pipe_,
     //  First, register the pipe so that we can terminate it later on.
     pipe_->set_event_sink (this);
     pipes.push_back (pipe_);
-    
+
     //  Then, pass the pipe to the specific socket type.
     //  If the peer haven't specified it's identity, let's generate one.
     if (peer_identity_.size ()) {
@@ -373,7 +373,7 @@ int zmq::socket_base_t::bind (const char *addr_)
 
         //  For convenience's sake, bind can be used interchageable with
         //  connect for PGM and EPGM transports.
-        return connect (addr_); 
+        return connect (addr_);
     }
 
     zmq_assert (false);
@@ -530,7 +530,7 @@ int zmq::socket_base_t::send (msg_t *msg_, int flags_)
         return -1;
 
     //  Compute the time when the timeout should occur.
-    //  If the timeout is infite, don't care. 
+    //  If the timeout is infite, don't care.
     clock_t clock ;
     int timeout = options.sndtimeo;
     uint64_t end = timeout < 0 ? 0 : (clock.now_ms () + timeout);
@@ -593,10 +593,10 @@ int zmq::socket_base_t::recv (msg_t *msg_, int flags_)
     //  If we have the message, return immediately.
     if (rc == 0) {
         rcvlabel = msg_->flags () & msg_t::label;
+        rcvmore = msg_->flags () & msg_t::more || rcvlabel;
         if (rcvlabel)
             msg_->reset_flags (msg_t::label);
-        rcvmore = msg_->flags () & msg_t::more ? true : false;
-        if (rcvmore || rcvlabel)
+        if (rcvmore)
             msg_->reset_flags (msg_t::more);
         return 0;
     }
@@ -614,16 +614,16 @@ int zmq::socket_base_t::recv (msg_t *msg_, int flags_)
         if (rc < 0)
             return rc;
         rcvlabel = msg_->flags () & msg_t::label;
+        rcvmore = msg_->flags () & msg_t::more || rcvlabel;
         if (rcvlabel)
             msg_->reset_flags (msg_t::label);
-        rcvmore = msg_->flags () & msg_t::more ? true : false;
-        if (rcvmore || rcvlabel)
+        if (rcvmore)
             msg_->reset_flags (msg_t::more);
         return 0;
     }
 
     //  Compute the time when the timeout should occur.
-    //  If the timeout is infite, don't care. 
+    //  If the timeout is infite, don't care.
     clock_t clock ;
     int timeout = options.rcvtimeo;
     uint64_t end = timeout < 0 ? 0 : (clock.now_ms () + timeout);
@@ -650,13 +650,11 @@ int zmq::socket_base_t::recv (msg_t *msg_, int flags_)
             }
         }
     }
-
-    //  Extract LABEL & MORE flags from the message.
     rcvlabel = msg_->flags () & msg_t::label;
+    rcvmore = msg_->flags () & msg_t::more || rcvlabel;
     if (rcvlabel)
         msg_->reset_flags (msg_t::label);
-    rcvmore = msg_->flags () & msg_t::more ? true : false;
-    if (rcvmore || rcvlabel)
+    if (rcvmore)
         msg_->reset_flags (msg_t::more);
     return 0;
 }
@@ -716,7 +714,7 @@ zmq::session_t *zmq::socket_base_t::find_session (const blob_t &name_)
         session->inc_seqnum ();
 
     sessions_sync.unlock ();
-    return session;    
+    return session;
 }
 
 void zmq::socket_base_t::start_reaping (poller_t *poller_)
