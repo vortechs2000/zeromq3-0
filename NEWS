@@ -23,6 +23,8 @@ Bug fixes
 
 * Fixed issue 255, RCVMORE not set on labels.
 
+* Fixed issue 257, subscription filtering not working properly.
+
 Building
 --------
 
