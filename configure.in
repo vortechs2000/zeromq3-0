@@ -26,10 +26,11 @@ AC_SUBST(PACKAGE_VERSION)
 # Changes:
 #
 # ZeroMQ versions prior to 2.1.0 use 0.0.0 ("unstable")
-# ZeroMQ version 2.1.0: 1:0:0
+# ZeroMQ version 2.1.x: 1:0:0
+# ZeroMQ version 3.0.x: 2:0:0
 #
 # libzmq -version-info current:revision:age
-LTVER="1:0:0"
+LTVER="2:0:0"
 AC_SUBST(LTVER)
 
 # Take a copy of original flags
@@ -90,7 +91,7 @@ case "${host_os}" in
         fi
         AC_DEFINE(ZMQ_HAVE_LINUX, 1, [Have Linux OS])
         AC_CHECK_LIB(rt, sem_init)
-        AC_CHECK_LIB(uuid, uuid_generate, , 
+        AC_CHECK_LIB(uuid, uuid_generate, ,
             [AC_MSG_ERROR([cannot link with -luuid, install uuid-dev.])])
 
         case "${host_os}" in
@@ -292,8 +293,8 @@ libzmq_pgm_ext="no"
 
 pgm_basename="libpgm-5.1.115~dfsg"
 
-AC_ARG_WITH([pgm], [AS_HELP_STRING([--with-pgm], 
-    [build libzmq with PGM extension [default=no]])], 
+AC_ARG_WITH([pgm], [AS_HELP_STRING([--with-pgm],
+    [build libzmq with PGM extension [default=no]])],
     [with_pgm_ext=$withval], [with_pgm_ext=no])
 
 # build using system pgm
