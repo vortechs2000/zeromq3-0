@@ -213,9 +213,12 @@ void zmq::mtrie_t::match (unsigned char *data_, size_t size_,
     while (size_) {
 
         //  Signal the pipes attached to this node.
-        for (pipes_t::iterator it = current->pipes.begin ();
-              it != current->pipes.end (); ++it)
-            func_ (*it, arg_);
+		if(data_ [0] == current->min)
+		{
+			for (pipes_t::iterator it = current->pipes.begin ();
+				  it != current->pipes.end (); ++it)
+				func_ (*it, arg_);
+		}
 
         //  If there are no subnodes in the trie, return.
         if (current->count == 0)
