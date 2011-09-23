@@ -59,7 +59,7 @@ namespace zmq
 
     private:
 
-        bool add_helper (mtrie_t *parent_trie_, unsigned char *prefix_, size_t size_,
+        bool add_helper (unsigned char *prefix_, size_t size_,
             class pipe_t *pipe_);
         void rm_helper (class pipe_t *pipe_, unsigned char **buff_,
             size_t buffsize_, size_t maxbuffsize_,
