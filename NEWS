@@ -27,6 +27,9 @@ Bug fixes
 
 * Fixed unlogged issue, assertion failure in xpub.cpp:65.
 
+* Fixed issue 258, assertion failure in xrep.cpp:168 when sending to 
+  terminating pipe.
+
 Building
 --------
 
