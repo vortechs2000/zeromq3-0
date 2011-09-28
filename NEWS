@@ -25,6 +25,8 @@ Bug fixes
 
 * Fixed issue 257, subscription filtering not working properly.
 
+* Fixed unlogged issue, assertion failure in xpub.cpp:65.
+
 Building
 --------
 
