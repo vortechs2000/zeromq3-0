@@ -30,6 +30,8 @@ Bug fixes
 * Fixed issue 258, assertion failure in xrep.cpp:168 when sending to 
   terminating pipe.
 
+* Fixed issue 263, bug in subscription matching.
+
 Building
 --------
 
