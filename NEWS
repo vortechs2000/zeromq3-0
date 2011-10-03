@@ -1,4 +1,4 @@
-0MQ version 3.0.2 (beta), released on 2011/09/xx
+0MQ version 3.0.2 (beta), released on 2011/10/03
 ================================================
 
 Bug fixes
@@ -27,10 +27,12 @@ Bug fixes
 
 * Fixed unlogged issue, assertion failure in xpub.cpp:65.
 
-* Fixed issue 258, assertion failure in xrep.cpp:168 when sending to 
+* Fixed issue 258, assertion failure in xrep.cpp:168 when sending to
   terminating pipe.
 
 * Fixed issue 263, bug in subscription matching.
+
+* Fixed documentation for ZMQ_XREQ and ZMQ_XREP sockets.
 
 Building
 --------
