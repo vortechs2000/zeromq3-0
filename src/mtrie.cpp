@@ -210,12 +210,16 @@ void zmq::mtrie_t::match (unsigned char *data_, size_t size_,
     void (*func_) (pipe_t *pipe_, void *arg_), void *arg_)
 {
     mtrie_t *current = this;
-    while (size_ >= 0) {
+    while (true) {
 
         //  Signal the pipes attached to this node.
 		for (pipes_t::iterator it = current->pipes.begin ();
 			it != current->pipes.end (); ++it)
 			func_ (*it, arg_);
+
+		// If we are at the end of the message, there's nothing more to match.
+		if(!size_)
+			break;
 
         //  If there are no subnodes in the trie, return.
         if (current->count == 0)
@@ -236,8 +240,6 @@ void zmq::mtrie_t::match (unsigned char *data_, size_t size_,
             break;
         if (!current->next.table [data_ [0] - min])
             break;
-		if (size_ == 0)
-			break;
         current = current->next.table [data_ [0] - min];
         data_++;
         size_--;
