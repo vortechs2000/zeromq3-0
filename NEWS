@@ -1,3 +1,14 @@
+0MQ version 3.0.3 (beta), released on 2011/10/xx
+================================================
+
+Bug fixes
+---------
+
+* Fixed issue 266, discard messages on any ID invalidation (Perry Kundert).
+
+* Fixed issue 257, subscription filtering not working properly (new backport).
+
+
 0MQ version 3.0.2 (beta), released on 2011/10/03
 ================================================
 
