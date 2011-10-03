@@ -52,16 +52,16 @@ zmq::mtrie_t::~mtrie_t ()
 
 bool zmq::mtrie_t::add (unsigned char *prefix_, size_t size_, pipe_t *pipe_)
 {
-    return add_helper (this, prefix_, size_, pipe_);
+    return add_helper (prefix_, size_, pipe_);
 }
 
-bool zmq::mtrie_t::add_helper (mtrie_t *parent_trie_, unsigned char *prefix_, size_t size_,
+bool zmq::mtrie_t::add_helper (unsigned char *prefix_, size_t size_,
     pipe_t *pipe_)
 {
     //  We are at the node corresponding to the prefix. We are done.
     if (!size_) {
-        bool result = parent_trie_->pipes.empty ();
-        parent_trie_->pipes.insert (pipe_);
+        bool result = pipes.empty ();
+        pipes.insert (pipe_);
         return result;
     }
 
@@ -120,14 +120,14 @@ bool zmq::mtrie_t::add_helper (mtrie_t *parent_trie_, unsigned char *prefix_, si
             next.node = new (std::nothrow) mtrie_t;
             zmq_assert (next.node);
         }
-        return next.node->add_helper (this, prefix_ + 1, size_ - 1, pipe_);
+        return next.node->add_helper (prefix_ + 1, size_ - 1, pipe_);
     }
     else {
         if (!next.table [c - min]) {
             next.table [c - min] = new (std::nothrow) mtrie_t;
             zmq_assert (next.table [c - min]);
         }
-        return next.table [c - min]->add_helper (this, prefix_ + 1, size_ - 1, pipe_);
+        return next.table [c - min]->add_helper (prefix_ + 1, size_ - 1, pipe_);
     }
 }
 
@@ -210,12 +210,16 @@ void zmq::mtrie_t::match (unsigned char *data_, size_t size_,
     void (*func_) (pipe_t *pipe_, void *arg_), void *arg_)
 {
     mtrie_t *current = this;
-    while (size_) {
+    while (true) {
 
         //  Signal the pipes attached to this node.
-        for (pipes_t::iterator it = current->pipes.begin ();
-              it != current->pipes.end (); ++it)
-            func_ (*it, arg_);
+		for (pipes_t::iterator it = current->pipes.begin ();
+			it != current->pipes.end (); ++it)
+			func_ (*it, arg_);
+
+		// If we are at the end of the message, there's nothing more to match.
+		if(!size_)
+			break;
 
         //  If there are no subnodes in the trie, return.
         if (current->count == 0)
