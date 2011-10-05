@@ -1,3 +1,17 @@
+0MQ version 3.0.3 (beta), released on 2011/10/xx
+================================================
+
+Bug fixes
+---------
+
+Changes
+-------
+
+* Re-added OpenPGM rate limiting.
+
+* New upstream OpenPGM maintenance release 5.1.118.
+
+
 0MQ version 3.0.2 (beta), released on 2011/10/03
 ================================================
 
