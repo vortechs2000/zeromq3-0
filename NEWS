@@ -8,6 +8,15 @@ Bug fixes
 
 * Fixed issue 257, subscription filtering not working properly (new backport).
 
+Changes
+-------
+
+* HWMs are set to 1,000 by default (previously, were unlimited).
+
+* Re-added OpenPGM rate limiting.
+
+* New upstream OpenPGM maintenance release 5.1.118.
+
 
 0MQ version 3.0.2 (beta), released on 2011/10/03
 ================================================
