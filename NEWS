@@ -8,6 +8,9 @@ Bug fixes
 
 * Fixed issue 257, subscription filtering not working properly (new backport).
 
+* Fixed issue 275, dealing with very small messages in distribution when 
+  pipes fail to write.
+
 Changes
 -------
 
