@@ -67,15 +67,26 @@ void zmq::generate_uuid (void *buf_)
 
 #else
 
+#if defined ZMQ_HAVE_HPUX && defined HAVE_LIBDCEKT
+#include <dce/uuid.h>
+#else
 #include <openssl/rand.h>
+#endif
 
 void zmq::generate_uuid (void *buf_)
 {
     unsigned char *buf = (unsigned char*) buf_;
-
+#if defined ZMQ_HAVE_HPUX && defined HAVE_LIBDCEKT
+    ::uuid_t uuid;
+    unsigned32 ret;
+    uuid_create(&uuid, &ret);
+    zmq_assert (ret == uuid_s_ok);
+    memcpy(rand_buf, &uuid, sizeof(uuid));
+#else
     //  Generate random value.
     int ret = RAND_bytes (buf, 16);
     zmq_assert (ret == 1);
+#endif
 
     //  Set UUID variant to 2 (UUID as specified in RFC4122).
     const unsigned char variant = 2;
