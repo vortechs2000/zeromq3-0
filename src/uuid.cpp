@@ -35,24 +35,21 @@ void zmq::generate_uuid (void *buf_)
     zmq_assert (ret == RPC_S_OK);
 }
 
-#elif defined ZMQ_HAVE_FREEBSD || defined ZMQ_HAVE_NETBSD
+#elif defined ZMQ_HAVE_FREEBSD || defined ZMQ_HAVE_NETBSD || (defined ZMQ_HAVE_HPUX && defined HAVE_LIBDCEKT)
 
+#ifdef ZMQ_HAVE_HPUX
+#include <dce/uuid.h>
+#else
 #include <uuid.h>
+#endif
 
 void zmq::generate_uuid (void *buf_)
 {
-    uint32_t status;
-    uuid_create ((::uuid_t*) buf_, &status);
-    zmq_assert (status == uuid_s_ok);
-}
-
-#elif defined ZMQ_HAVE_HPUX && defined HAVE_LIBDCEKT
-
-#include <dce/uuid.h>
-
-void zqm::generate_uuid (void *buf_)
-{
+#ifdef ZMQ_HAVE_HPUX
     unsigned32 status;
+#else
+    uint32_t status;
+#endif
     uuid_create ((::uuid_t*) buf_, &status);
     zmq_assert (status == uuid_s_ok);
 }
