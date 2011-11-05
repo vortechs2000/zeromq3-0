@@ -6,6 +6,13 @@ Bug fixes
 
 * Fixed issue 277, bug in trie.
 
+* Fixed issue 266, discard messages on any ID invalidation (Perry Kundert).
+
+* Fixed issue 257, subscription filtering not working properly (new backport).
+
+* Fixed issue 275, dealing with very small messages in distribution when 
+  pipes fail to write.
+
 Changes
 -------
 
@@ -14,6 +21,8 @@ Changes
 * Re-added OpenPGM rate limiting.
 
 * New upstream OpenPGM maintenance release 5.1.118.
+
+* Enabled debugging on assertion failure on Windows (Paul Betts).
 
 
 0MQ version 3.0.2 (beta), released on 2011/10/03
