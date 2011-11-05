@@ -4,6 +4,8 @@
 Bug fixes
 ---------
 
+* Fixed issue 277, bug in trie.
+
 Changes
 -------
 
