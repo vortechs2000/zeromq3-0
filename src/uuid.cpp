@@ -45,13 +45,20 @@ void zmq::generate_uuid (void *buf_)
 
 void zmq::generate_uuid (void *buf_)
 {
+    ::uuid_t tmp_uuid;
 #ifdef ZMQ_HAVE_HPUX
     unsigned32 status;
 #else
     uint32_t status;
 #endif
-    uuid_create ((::uuid_t*) buf_, &status);
+    /* Make sure we don't overrun the buffer */
+    int size = sizeof (tmp_uuid);
+    if (size > 16)
+	size = 16;
+
+    uuid_create (&tmp_uuid, &status);
     zmq_assert (status == uuid_s_ok);
+    memcpy (buf_, &tmp_uuid, size);
 }
 
 #elif defined ZMQ_HAVE_LINUX || defined ZMQ_HAVE_SOLARIS ||\
