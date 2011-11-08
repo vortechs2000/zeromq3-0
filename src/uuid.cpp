@@ -31,6 +31,7 @@
 
 void zmq::generate_uuid (void *buf_)
 {
+    zmq_assert (buf_ != NULL);
     RPC_STATUS ret = UuidCreate ((::UUID*) buf_);
     zmq_assert (ret == RPC_S_OK);
 }
@@ -58,6 +59,7 @@ void zmq::generate_uuid (void *buf_)
 
     uuid_create (&tmp_uuid, &status);
     zmq_assert (status == uuid_s_ok);
+    zmq_assert (buf_ != NULL);
     memcpy (buf_, &tmp_uuid, size);
 }
 
@@ -68,6 +70,7 @@ void zmq::generate_uuid (void *buf_)
 
 void zmq::generate_uuid (void *buf_)
 {
+    zmq_assert (buf_ != NULL);
     uuid_generate ((unsigned char*) buf_);
 }
 
@@ -77,7 +80,8 @@ void zmq::generate_uuid (void *buf_)
 
 void zmq::generate_uuid (void *buf_)
 {
-    sys$create_uid(buf_);
+    zmq_assert (buf_ != NULL);
+    sys$create_uid(buf_);]
 }
 
 #else
@@ -86,6 +90,8 @@ void zmq::generate_uuid (void *buf_)
 
 void zmq::generate_uuid (void *buf_)
 {
+    zmq_assert (buf_ != NULL);
+
     unsigned char *buf = (unsigned char*) buf_;
 
     //  Generate random value.
