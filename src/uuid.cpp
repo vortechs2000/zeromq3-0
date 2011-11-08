@@ -49,7 +49,6 @@ void zmq::generate_uuid (void *buf_)
     ::uuid_t tmp_uuid;
 #ifdef ZMQ_HAVE_HPUX
     unsigned32 status;
-    memset(buf_, 0, 16);
 #else
     uint32_t status;
 #endif
