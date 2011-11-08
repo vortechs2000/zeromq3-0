@@ -24,6 +24,8 @@
 namespace zmq
 {
 
+    class msg_t;
+
     //  Abstract interface to be implemented by various engines.
 
     struct i_engine
@@ -57,10 +59,10 @@ namespace zmq
         virtual ~i_engine_sink () {}
 
         //  Engine asks for a message to send to the network.
-        virtual bool read (class msg_t *msg_) = 0;
+        virtual bool read (zmq::msg_t *msg_) = 0;
 
         //  Engine received message from the network and sends it further on.
-        virtual bool write (class msg_t *msg_) = 0;
+        virtual bool write (zmq::msg_t *msg_) = 0;
 
         //  Flush all the previously written messages.
         virtual void flush () = 0;
